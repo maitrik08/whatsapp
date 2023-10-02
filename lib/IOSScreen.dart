@@ -911,8 +911,32 @@ class IOSScreen extends StatelessWidget {
                       Divider(color: Colors.grey,),
                       InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Androidscreen()));
-                        },
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.black,
+                                title: const Text('Switch to Android',style: TextStyle(color: Colors.white),),
+                                content: const SingleChildScrollView(
+                                  child: Text('Are you Want to Switch to Android',style: TextStyle(color: Colors.white)),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Cancel',style: TextStyle(color: Colors.white)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Yes',style: TextStyle(color: Colors.white)),
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Androidscreen()));
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );                        },
                           child: Settingitem(icon: 'https://cdn-icons-png.flaticon.com/128/11819/11819975.png', Title: "Avatar", color: Color(0xff337DF2),divider: false)
                       ),
                       SizedBox(height: 5,)

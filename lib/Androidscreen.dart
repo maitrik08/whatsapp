@@ -68,7 +68,7 @@ class AndroidscreenState extends State<Androidscreen> with SingleTickerProviderS
       body:CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            pinned: false,
+            pinned: index==1?false:true,
             snap: false,
             floating: true,
             title: Text(
@@ -96,7 +96,33 @@ class AndroidscreenState extends State<Androidscreen> with SingleTickerProviderS
               ),
               InkWell(
                   onTap: () {
-                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => IOSScreen()));
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.black,
+                            title: const Text('Switch to IOS',style: TextStyle(color: Colors.white),),
+                            content: const SingleChildScrollView(
+                              child: Text('Are you Want to Switch to IOS',style: TextStyle(color: Colors.white)),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('Cancel',style: TextStyle(color: Colors.white)),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: const Text('Yes',style: TextStyle(color: Colors.white)),
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => IOSScreen()));
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                    );
+                         //Navigator.of(context).push(MaterialPageRoute(builder: (context) => IOSScreen()));
                   },
                   child: Icon(Icons.more_vert,color: Colors.grey,)
               ),
